@@ -11,7 +11,7 @@ st.set_page_config(
  #دالة الai
 def ai(prompt):
     key = st.secrets["GEMINI_API_KEY"]
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
     data = {"contents": [{"parts": [{"text": prompt}]}]}
 
     try:
