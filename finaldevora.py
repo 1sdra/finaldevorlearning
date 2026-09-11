@@ -8,10 +8,11 @@ from streamlit_drawable_canvas import st_canvas
 os.makedirs("drawings", exist_ok=True)
 st.set_page_config(
     page_title="study with me", page_icon="🎀", layout="centered")
- #دالة الai
+
+#دالة الai
 def ai(prompt):
     key = st.secrets["GEMINI_API_KEY"]
-    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
+    url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
     data = {"contents": [{"parts": [{"text": prompt}]}]}
 
     try:
@@ -54,56 +55,56 @@ if st.session_state.page == "Home":
 
     with col1:
         if st.button(" Ai Assistant 🤖"):
-            go("Planner")
+            go("ai")
 
         if st.button('dictionary 📖'):
-            go("Dictionary")
+            go("dictionary")
 
     with col2:
         if st.button("Planner 📅"):
-            go("Planner")
+            go("planner")
 
         if st.button("Drawing 🎨"):
             go("Drawing")
 
+
 # ai assistant
  
 elif st.session_state.page == "ai":
-   st.title("ai assistant ")
-   if st.button("home"):
-       go ("home")
+    st.title("ai assistant ")
+    if st.button("home"):
+        go("Home")
 
-   question = st.text_input("ask gemini any thing you want")
-   if st.button("ask") and question:
-            st.write(ai(question))
+    question = st.text_input("ask gemini any thing you want")
+    if st.button("ask") and question:
+        st.write(ai(question))
+
 
 # dictionary
 
 elif st.session_state.page == "dictionary":
     st.title(" dictionary")
     if st.button("home"):
-      go("home")
+        go("Home")
 
     word = st.text_input("enter aword")
     if st.button("explain") and word:
         st.write(ai("explian this word simply and give an example:"+word))
 
-        #planner   
 
-    elif st.session_state.page == "planner":
-            st.title(" planner")
-            if st.button("home"):
-                go("home")
+#planner   
+
+elif st.session_state.page == "planner":
+    st.title(" planner")
+    if st.button("home"):
+        go("Home")
 
     subject = st.text_input(" subject")
     date = st.date_input(" date")
     time = st.time_input(" time")
     if st.button("add session"):
-            with open("planner.txt", "a") as f:
-                st.success(f"{subject} - {date} - {time}\n")
-
-
-
+        with open("planner.txt", "a") as f:
+            st.success(f"{subject} - {date} - {time}\n")
 
 
 
